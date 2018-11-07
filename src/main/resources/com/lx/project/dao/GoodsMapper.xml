@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lx.project.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.lx.project.po.Goods">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="BIGINT" property="num" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="isUp" jdbcType="BIT" property="isup" />
+    <result column="tid" jdbcType="BIGINT" property="tid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, num, sid, isUp, tid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from goods
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lx.project.po.Goods">
+    insert into goods (id, name, num, 
+      sid, isUp, tid)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{num,jdbcType=BIGINT}, 
+      #{sid,jdbcType=VARCHAR}, #{isup,jdbcType=BIT}, #{tid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lx.project.po.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="isup != null">
+        isUp,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=BIGINT},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="isup != null">
+        #{isup,jdbcType=BIT},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lx.project.po.Goods">
+    update goods
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=BIGINT},
+      </if>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="isup != null">
+        isUp = #{isup,jdbcType=BIT},
+      </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lx.project.po.Goods">
+    update goods
+    set name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=BIGINT},
+      sid = #{sid,jdbcType=VARCHAR},
+      isUp = #{isup,jdbcType=BIT},
+      tid = #{tid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
